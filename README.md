@@ -12,7 +12,7 @@
 
 an x designates that the given value is mirrored, strikethrough designates a number as a non-trivial duplicate.
 
-$E(5) = {1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 20, 25}$
+$E(5) = \{1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 20, 25\}$
 
 $M(5) = |E(5)| = 14$
 
