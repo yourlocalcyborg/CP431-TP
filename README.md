@@ -33,4 +33,6 @@ $M(5) = |E(5)| = 14$
 
 ## Algorithm
 
-a dispatcher ($D$) gives a worker from a set of workers with ID $n$ $(W_n)$ a column $i$, and $W_n$ calculates $A_i = \{ i*1, i*2, ... , i*i \}$. $W_n$ finishes calculation, then sends $A_i$ to $D$, and $D$ sends $W_n$ some other column $i' > i$, before adding the numbers found in $A_i$ to its complete set of found numbers.
+All processes are workers, except for one collector. each worker calculates a column of the matrix $i$ (up to the point of mirroring where the value is $i*i$) and then sends it to the collector, which keeps track of which values have been found.
+
+This is not a long-term solution though, as the sequential collector is quickly made to execute far longer than the workers, mitigating benefit from parallel calculation.
