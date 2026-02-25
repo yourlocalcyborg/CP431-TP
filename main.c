@@ -5,9 +5,9 @@ int dispatcher(int size, MPI_Comm comm) {
   printf("DISPATCHER START\n");
 
   // Init workers
-  unsigned long long int results[] = {0xfffff};
   for (int i = 0; i < size; i++) {
-    MPI_Send(results, 1, MPI_UNSIGNED_LONG, i, 0, comm);
+    unsigned long long int send[] = {i};
+    MPI_Send(send, 1, MPI_UNSIGNED_LONG, i, 0, comm);
   }
 
   // Wait for worker finish, re-dispatch
@@ -20,9 +20,20 @@ int dispatcher(int size, MPI_Comm comm) {
 
 int worker(int rank, MPI_Comm comm) {
   printf("WORKER %d START\n", rank);
-  unsigned long long int results[] = {0x00};
-  MPI_Recv(results, 1, MPI_UNSIGNED_LONG_LONG, 0, 0, comm, MPI_STATUS_IGNORE);
-  printf("WORKER %d RECEIVE: %#x \n", rank, results[0]);
+
+  unsigned long long int column[] = {0x00};
+  MPI_Recv(column, 1, MPI_UNSIGNED_LONG_LONG, 0, 0, comm, MPI_STATUS_IGNORE);
+
+  unsigned long long int col = column[0];
+
+  printf("WORKER %d STARTING COLUMN %#x\n", rank, col);
+
+  unsigned long long int results[col];
+  for (unsigned long long int i = 0; i < col; i++) {
+    results[i] = col*(i+1);
+    printf("VALUE: %d * %d = %d\n", col, (i+1), col*(i+1));
+  }
+
   return 0;	
 }
 
