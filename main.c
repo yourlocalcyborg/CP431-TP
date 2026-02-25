@@ -24,7 +24,7 @@ void collector(int size, unsigned long int N, MPI_Comm comm) {
     unsigned long long int receive[column];
     //printf("C: ATTEMPT RECEIVE W%d\n", worker);
     MPI_Recv(receive, column, MPI_UNSIGNED_LONG_LONG, worker, 0, comm, MPI_STATUS_IGNORE);
-    printf("C: RECEIVED W%d FOR COLUMN %d\n", worker, receive[0]);
+    printf("C: RECEIVED W%d FOR COLUMN %lld\n", worker, receive[0]);
 
     // Add results to final array
     for (size_t i = 0; i < (column); i++) {
@@ -61,7 +61,11 @@ void worker(int rank, int size, unsigned long int N, MPI_Comm comm) {
 }
 
 int main(int argc, char** argv) {
-  unsigned long int N = 10000;
+  if (!(argc > 1)) {
+    printf("Usage: %s [N]\n", argv[0]);
+    return 1;
+  }
+  unsigned long int N = atoi(argv[1]);
 
   // Initialize the MPI environment
   MPI_Init(NULL, NULL);
