@@ -10,9 +10,10 @@
 |4|-| x|    x| x|16|20|
 |5|-| x|    x| x| x|25|
 
-an x designates that the given value is mirrored.
+an x designates that the given value is mirrored, strikethrough designates a number as a non-trivial duplicate.
 
-M(5) = 14
+$E(5) = {1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 20, 25}$
+$M(5) = |E(5)| = 14$
 
 ## M(10)
 ---
